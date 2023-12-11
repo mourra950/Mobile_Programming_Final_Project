@@ -39,6 +39,8 @@ class _SignUpState extends State<SignUp> {
           child: Form(
               key: _formkey,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextFormField(
                     onSaved: (newValue) => _submitEmail = newValue!.trim(),
@@ -54,7 +56,6 @@ class _SignUpState extends State<SignUp> {
                     },
                     obscureText: false,
                     decoration: InputDecoration(
-                      hintFadeDuration: Duration(seconds: 10),
                       hintText: "Insert your ASU email",
                     ),
                   ),
@@ -68,7 +69,6 @@ class _SignUpState extends State<SignUp> {
                     },
                     obscureText: false,
                     decoration: InputDecoration(
-                      hintFadeDuration: Duration(seconds: 10),
                       hintText: "Insert your name",
                     ),
                   ),
@@ -89,7 +89,6 @@ class _SignUpState extends State<SignUp> {
                     obscureText: false,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
-                      hintFadeDuration: Duration(seconds: 10),
                       hintText: "Insert your phone number",
                     ),
                   ),
@@ -105,7 +104,6 @@ class _SignUpState extends State<SignUp> {
                     },
                     obscureText: true,
                     decoration: InputDecoration(
-                      hintFadeDuration: Duration(seconds: 10),
                       hintText: "Insert password",
                     ),
                   ),
@@ -122,7 +120,6 @@ class _SignUpState extends State<SignUp> {
                     },
                     obscureText: true,
                     decoration: InputDecoration(
-                      hintFadeDuration: Duration(seconds: 10),
                       hintText: "Insert the password again",
                     ),
                   ),
