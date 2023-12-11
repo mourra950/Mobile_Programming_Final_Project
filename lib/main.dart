@@ -1,9 +1,8 @@
+// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
-import 'package:untitled/homepage.dart';
-import 'package:untitled/Signin.dart';
-import 'package:untitled/signup.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:untitled/pages/SignUp.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +20,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Car Pool",
-      initialRoute: '/Signin',
+      initialRoute: '/SignUp',
       routes: {
-        '/Signin': (context) => Signin(),
+        '/SignUp': (context) => SignUp(),
       },
     );
   }
