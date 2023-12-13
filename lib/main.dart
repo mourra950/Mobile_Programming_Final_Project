@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       title: "Car Pool",
       initialRoute: '/SignUp',
       routes: {
-        '/SignUp': (context) => TripCardPage(),
+        '/SignUp': (context) => HomePage(),
       },
     );
   }

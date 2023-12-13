@@ -38,6 +38,16 @@ class _TripCardPageState extends State<TripCardPage> {
                         target: _center,
                         zoom: 11.0,
                       ))),
+              ListTile(
+                  leading: Text('Lead'),
+                  tileColor: Colors.amber,
+                  title: Column(children: [
+                    Text('Driver name'),
+                    Text('Driver Car'),
+                    Text('Date of the drive'),
+                    Text('Time of the drive'),
+                    Text('To location from location')
+                  ])),
               Card(
                 child: Column(children: [
                   Text('Driver name'),
