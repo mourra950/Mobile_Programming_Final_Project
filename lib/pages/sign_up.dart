@@ -131,10 +131,23 @@ class _SignUpState extends State<SignUp> {
                     ),
                     SizedBox(height: sizedboxheight * 1.5),
                     OutlinedButton(
-                        onPressed: () {
-                          _signUpUser();
-                        },
-                        child: Text("Sign Up"))
+                      onPressed: () {
+                        _signUpUser();
+                      },
+                      child: Text("Sign Up"),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text('Already have account?'),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(context, '/SignIn');
+                          },
+                          child: Text('Sign In'),
+                        ),
+                      ],
+                    ),
                   ],
                 )),
           ),

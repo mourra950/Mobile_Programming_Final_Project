@@ -16,25 +16,13 @@ class ImgSample {
 }
 
 class MyColorsSample {
-  static const Color primary = Color(0xFF12376F);
-  static const Color primaryDark = Color(0xFF0C44A3);
-  static const Color primaryLight = Color(0xFF43A3F3);
-  static const Color green = Colors.green;
-  static Color black = const Color(0xFF000000);
-  static const Color accent = Color(0xFFFF4081);
-  static const Color accentDark = Color(0xFFF50057);
-  static const Color accentLight = Color(0xFFFF80AB);
-  static const Color grey_3 = Color(0xFFf7f7f7);
-  static const Color grey_5 = Color(0xFFf2f2f2);
-  static const Color grey_10 = Color(0xFFe6e6e6);
-  static const Color grey_20 = Color(0xFFcccccc);
-  static const Color grey_40 = Color(0xFF999999);
-  static const Color grey_60 = Color(0xFF666666);
-  static const Color grey_80 = Color(0xFF37474F);
-  static const Color grey_90 = Color(0xFF263238);
-  static const Color grey_95 = Color(0xFF1a1a1a);
-  static const Color grey_100_ = Color(0xFF0d0d0d);
-  static const Color transparent = Color(0x00f7f7f7);
+  static const Color avaible = Color.fromARGB(255, 27, 177, 27);
+  static const Color pending = Color.fromARGB(255, 255, 179, 28);
+  static const Color unaivable = Color.fromARGB(255, 212, 35, 35);
+  static const List<Color> ColorList = [avaible, pending, unaivable];
+  static Color getStatusColor(int index) {
+    return ColorList[index];
+  }
 }
 
 class MyTextSample {
@@ -108,6 +96,8 @@ class MyStringsSample {
 }
 
 class _TripCardState extends State<TripCard> {
+  int status = 0;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -129,7 +119,7 @@ class _TripCardState extends State<TripCard> {
               children: <Widget>[
                 // Add an image widget to display an image
                 Badge(
-                  backgroundColor: Colors.green,
+                  backgroundColor: MyColorsSample.getStatusColor(status),
                   child: Image.asset(
                     ImgSample.get('car.png'),
                     height: 100,
@@ -146,19 +136,19 @@ class _TripCardState extends State<TripCard> {
                       Text(
                         "Cards Title 1",
                         style: MyTextSample.title(context)!.copyWith(
-                          color: MyColorsSample.grey_80,
+                          color: MyColorsSample.getStatusColor(status),
                         ),
                       ),
                       Container(height: 5),
                       Text(
-                        "Sub title",
+                        "05:30 PM",
                         style: MyTextSample.body1(context)!.copyWith(
                           color: Colors.grey[500],
                         ),
                       ),
                       Container(height: 10),
                       Text(
-                        MyStringsSample.card_text,
+                        'from:____\nto:_____',
                         maxLines: 2,
                         style: MyTextSample.subhead(context)!.copyWith(
                           color: Colors.grey[700],

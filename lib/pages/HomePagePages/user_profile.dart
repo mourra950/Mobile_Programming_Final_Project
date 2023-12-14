@@ -35,7 +35,16 @@ class _ProfileState extends State<Profile> {
                     Text('phone'),
                   ]),
             )),
-        ElevatedButton(onPressed: () {}, child: Text('Sign out')),
+        Container(
+          child: Column(
+            children: [
+              ElevatedButton(onPressed: () {}, child: Text('Sign out')),
+              ElevatedButton(onPressed: () {}, child: Text('Delete Account')),
+              ElevatedButton(
+                  onPressed: () {}, child: Text('Visit Dev profile')),
+            ],
+          ),
+        )
       ],
     );
   }

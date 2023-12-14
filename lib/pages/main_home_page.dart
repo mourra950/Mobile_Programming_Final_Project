@@ -40,7 +40,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ]),
         appBar: AppBar(
-          backgroundColor: Colors.blue,
           title: Text("Home Page"),
           centerTitle: true,
         ),

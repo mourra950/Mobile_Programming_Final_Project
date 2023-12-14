@@ -53,6 +53,10 @@ class _SignInState extends State<SignIn> {
                       hintText: "Insert your ASU email",
                     ),
                   ),
+                  SizedBox(
+                    height: 20,
+                    width: 0,
+                  ),
                   TextFormField(
                     onSaved: (newValue) => _submitPass = newValue!.trim(),
                     validator: (value) {
@@ -68,11 +72,28 @@ class _SignInState extends State<SignIn> {
                       hintText: "Insert password",
                     ),
                   ),
+                  SizedBox(
+                    height: 40,
+                    width: 0,
+                  ),
                   OutlinedButton(
-                      onPressed: () {
-                        _signInUser();
-                      },
-                      child: Text("Sign In"))
+                    onPressed: () {
+                      _signInUser();
+                    },
+                    child: Text("Sign In"),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text('Need an account?'),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, '/SignUp');
+                        },
+                        child: Text('Sign Up'),
+                      ),
+                    ],
+                  ),
                 ],
               )),
         ),
