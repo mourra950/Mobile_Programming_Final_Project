@@ -19,11 +19,13 @@ class _SignUpState extends State<SignUp> {
   final _formkey = GlobalKey<FormState>();
 
   void _signUpUser() {
-    if (_formkey.currentState!.validate()) {
+    var form = _formkey.currentState!;
+    if (!form.validate()) {
       return;
     } else if (_submitPass != _submitPassConfirm) {
       return;
     }
+    form.save();
   }
 
   double sizedboxheight = 30;

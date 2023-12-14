@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
       title: "Car Pool",
-      initialRoute: '/SignIn',
+      initialRoute: '/SignUp',
       routes: {
         '/SignUp': (context) => SignUp(),
         '/SignIn': (context) => SignIn(),

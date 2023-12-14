@@ -1,6 +1,8 @@
 // ignore_for_file: unused_field, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:untitled/models/firebaseauth.dart';
+import 'package:untitled/utils/snack_bar.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -10,14 +12,24 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  String _submitEmail = '';
-  String _submitPass = '';
+  String _submitEmail = '19p4953@neg.asu.edu.eg';
+  String _submitPass = '12345678';
 
   final _formkey = GlobalKey<FormState>();
-  void _signInUser() {
-    if (_formkey.currentState!.validate()) {
+  void _signInUser() async {
+    if (!_formkey.currentState!.validate()) {
       return;
     }
+    _formkey.currentState!.save();
+    print(_submitEmail);
+    print(_submitPass);
+
+    //  ################################
+    var temp = await FBase.signIn(_submitEmail, _submitPass);
+    if (temp == 'Success') {
+      SBar.showSnackBar(context: context, message: 'User Signed in');
+    }
+    SBar.showSnackBar(context: context, message: temp);
   }
 
   @override
