@@ -53,8 +53,11 @@ class Profile {
     // Get a reference to the database.
     final db = await initDB();
     Profile.phone = name;
-    Profile.email = name;
-    Profile.name = name;
+    Profile.email = email;
+    Profile.name = phone;
+    print(name);
+    print(phone);
+    print(email);
     await db.insert(
       'profile',
       {'name': name, 'phone': phone, 'email': email, 'id': 1},
@@ -76,7 +79,7 @@ class Profile {
     return 'empty';
   }
 
-  static Future<String> profile() async {
+  static Future<String> fetchprofile() async {
     final db = await initDB();
 
     final List<Map<String, dynamic>> maps = await db.query('profile');
@@ -85,6 +88,7 @@ class Profile {
       phone = maps[0]['phone'];
       email = maps[0]['email'];
       id = maps[0]['id'];
+      print(email);
       return 'success';
     }
     return 'empty';

@@ -1,4 +1,4 @@
-// ignore_for_file: unused_field, prefer_const_constructors
+// ignore_for_file: unused_field, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:untitled/models/firebaseauth.dart';
@@ -12,24 +12,25 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  String _submitEmail = '19p4953@neg.asu.edu.eg';
-  String _submitPass = '12345678';
+  String _submitEmail = '';
+  String _submitPass = '';
 
   final _formkey = GlobalKey<FormState>();
+
   void _signInUser() async {
     if (!_formkey.currentState!.validate()) {
       return;
     }
     _formkey.currentState!.save();
-    print(_submitEmail);
-    print(_submitPass);
 
     //  ################################
-    var temp = await FBase.signIn(_submitEmail, _submitPass);
+    var temp = await FBase.signInRetrieveUserData(_submitEmail, _submitPass);
     if (temp == 'Success') {
       SBar.showSnackBar(context: context, message: 'User Signed in');
+      Navigator.pushReplacementNamed(context, '/HomePage');
+    } else {
+      SBar.showSnackBar(context: context, message: temp);
     }
-    SBar.showSnackBar(context: context, message: temp);
   }
 
   @override

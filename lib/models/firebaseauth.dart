@@ -13,9 +13,7 @@ class FBase {
   static Future<String> createUser(
       String userName, String userEmail, String pass, String phone) async {
     try {
-      // Create a new user in Firebase Authentication
-      var firebaseauth = FirebaseAuth.instance;
-      var userCred = await firebaseauth.createUserWithEmailAndPassword(
+      var userCred = await _firebaseauth.createUserWithEmailAndPassword(
         email: userEmail,
         password: pass,
       );
@@ -44,9 +42,6 @@ class FBase {
 
   static Future<String> signIn(String userEmail, String pass) async {
     try {
-      print(userEmail);
-      print(pass);
-
       var userCred = await _firebaseauth.signInWithEmailAndPassword(
           email: userEmail, password: pass);
       userhandler = userCred.user!;
@@ -56,19 +51,20 @@ class FBase {
     return 'Success';
   }
 
-  static Future<String> retrieveUserData(String userEmail, String pass) async {
+  static Future<String> signInRetrieveUserData(
+      String userEmail, String pass) async {
     try {
-      var firebaseauth = FirebaseAuth.instance;
-      var userCred = await firebaseauth.signInWithEmailAndPassword(
+      var userCred = await _firebaseauth.signInWithEmailAndPassword(
           email: userEmail, password: pass);
       userhandler = userCred.user!;
       final docRef = _firebasestore
-          .collection("usersProfile")
-          .where('email', isEqualTo: userhandler.email);
+          .collection("userinfo")
+          .where("email", isEqualTo: userEmail);
       await docRef.get().then((values) {
+        print('hamada');
         for (var value in values.docs) {
           Profile.insertProfile(
-              name: value.data()['name'],
+              name: value.data()['username'],
               phone: value.data()['phone'],
               email: value.data()['email']);
         }

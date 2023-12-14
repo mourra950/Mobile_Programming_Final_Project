@@ -8,6 +8,8 @@ import 'package:untitled/pages/sign_up.dart';
 import 'package:untitled/pages/sign_in.dart';
 import 'package:untitled/pages/main_home_page.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:untitled/models/firebaseauth.dart';
+import 'package:untitled/models/profile_sqflite.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +21,13 @@ void main() async {
       Permission.locationWhenInUse.request();
     }
   });
+  var isstoredprofile = await Profile.fetchprofile();
+  var cond = isstoredprofile == 'empty';
+  if (cond) {
+    print('empty');
+  } else {
+    print('found something');
+  }
   runApp(const MyApp());
 }
 
@@ -31,7 +40,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
       title: "Car Pool",
-      initialRoute: '/SignUp',
+      initialRoute: '/SignIn',
       routes: {
         '/SignUp': (context) => SignUp(),
         '/SignIn': (context) => SignIn(),

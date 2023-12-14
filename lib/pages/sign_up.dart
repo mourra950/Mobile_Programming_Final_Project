@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, unused_field, prefer_final_fields
 
 import 'package:flutter/material.dart';
+import 'package:untitled/models/firebaseauth.dart';
+import 'package:untitled/utils/snack_bar.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -18,7 +20,7 @@ class _SignUpState extends State<SignUp> {
 
   final _formkey = GlobalKey<FormState>();
 
-  void _signUpUser() {
+  void _signUpUser() async {
     var form = _formkey.currentState!;
     if (!form.validate()) {
       return;
@@ -26,6 +28,14 @@ class _SignUpState extends State<SignUp> {
       return;
     }
     form.save();
+    var temp = await FBase.createUser(
+        _submitName, _submitEmail, _submitPass, _submitPhone);
+    if (temp == 'Success') {
+      SBar.showSnackBar(context: context, message: 'User Signed Up');
+      Navigator.pushReplacementNamed(context, '/SignIn');
+    } else {
+      SBar.showSnackBar(context: context, message: temp);
+    }
   }
 
   double sizedboxheight = 30;
