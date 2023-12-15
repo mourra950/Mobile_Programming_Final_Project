@@ -22,18 +22,19 @@ void main() async {
     }
   });
   var isstoredprofile = await Profile.fetchprofile();
+  var initialroute = '/SignIn';
   var cond = isstoredprofile == 'empty';
   if (cond) {
     print('empty');
   } else {
-    print('found something');
+    initialroute = '/HomePage';
   }
-  runApp(const MyApp());
+  runApp(MyApp(initialroute: initialroute));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key, required this.initialroute});
+  String initialroute;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
