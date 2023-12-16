@@ -166,6 +166,33 @@ class _TripCardState extends State<TripCard> {
                     ],
                   ),
                 ),
+
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/TripPage', arguments: {
+                      'name': 'Hamada',
+                      'date': '',
+                      'driver': '',
+                      'from': '',
+                      'to': '',
+                      'type': '',
+                      'map': ''
+                    });
+                  },
+                  style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                      side:
+                          BorderSide(style: BorderStyle.none) // Remove padding
+                      ),
+                  child: Container(
+                    alignment: Alignment(0, 0),
+                    height: 100,
+                    child: Text("Details"),
+                  ),
+                ),
               ],
             ),
           ),

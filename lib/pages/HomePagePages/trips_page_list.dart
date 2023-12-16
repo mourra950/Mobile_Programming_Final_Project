@@ -16,10 +16,11 @@ class _TripsPageState extends State<TripsPage> {
     DateTime now = DateTime.now();
     DateTime deadline730 = DateTime(now.year, now.month, now.day, 22, 0, 0);
     DateTime deadline530 = DateTime(now.year, now.month, now.day, 13, 0, 0);
-    Timestamp Dead1 = Timestamp.fromDate(deadline730);
     var db = FirebaseFirestore.instance;
+    db.settings = const Settings(
+      persistenceEnabled: false,
+    );
 
-    // Combine the two queries using `||` (logical OR)
     var query = db.collection('Trips').where(
           Filter.or(
             Filter.and(
@@ -41,7 +42,11 @@ class _TripsPageState extends State<TripsPage> {
     return StreamBuilder<QuerySnapshot>(
       stream: streamerFirebase(),
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.hasData && snapshot.data!.docs != []) {
+          if (snapshot.data!.docs.isEmpty) {
+            return Text("No Availble trips at the moment");
+          }
+
           return ListView.builder(
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {

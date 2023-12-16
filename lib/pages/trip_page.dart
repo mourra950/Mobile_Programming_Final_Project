@@ -21,8 +21,10 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
     return Scaffold(
-      appBar: AppBar(leading: Text('Omar')),
+      appBar: AppBar(leading: Text(arguments['name'])),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
