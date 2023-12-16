@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:untitled/pages/HomePagePages/trip_card.dart';
+import 'package:untitled/components/trip_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -29,7 +29,13 @@ class _HistoryPageState extends State<HistoryPage> {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 DocumentSnapshot doc = snapshot.data!.docs[index];
-                return TripCard();
+                return TripCard(
+                  TripID: '1',
+                  date: '1',
+                  time: '1',
+                  to: '1',
+                  from: '1',
+                );
               });
         } else {
           return Text("Loading.... ");

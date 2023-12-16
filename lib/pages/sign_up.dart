@@ -57,21 +57,25 @@ class _SignUpState extends State<SignUp> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextFormField(
-                      onSaved: (newValue) => _submitEmail = newValue!.trim(),
+                      onSaved: (newValue) =>
+                          _submitEmail = "${newValue!.trim()}@eng.asu.edu.eg",
                       validator: (value) {
+                        var temp = "${value!.trim()}@eng.asu.edu.eg";
                         RegExp regex =
                             RegExp(r'^\d{2}[a-z]\d{4}@eng\.asu\.edu\.eg$');
-                        if (value!.trim().isEmpty) {
+                        if (temp.trim().isEmpty) {
                           return 'Can not be empty';
-                        } else if (!regex.hasMatch(value.trim())) {
+                        } else if (!regex.hasMatch(temp.trim())) {
                           return 'Sorry wrong format';
                         }
                         return null;
                       },
                       obscureText: false,
                       decoration: InputDecoration(
-                        hintText: "Insert your ASU email",
-                      ),
+                          hintText: "Insert your ASU email",
+                          suffix: Text("@eng.asu.edu.eg"),
+                          floatingLabelAlignment:
+                              FloatingLabelAlignment.center),
                     ),
                     SizedBox(height: sizedboxheight),
                     TextFormField(
