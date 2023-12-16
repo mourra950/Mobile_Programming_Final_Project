@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class Profile {
+class SqfProfile {
   static late String phone;
   static late String name;
   static late int id;
@@ -52,9 +52,9 @@ class Profile {
   static Future<void> insertProfile({name, email, phone}) async {
     // Get a reference to the database.
     final db = await initDB();
-    Profile.phone = name;
-    Profile.email = email;
-    Profile.name = phone;
+    SqfProfile.phone = name;
+    SqfProfile.email = email;
+    SqfProfile.name = phone;
     print(name);
     print(phone);
     print(email);

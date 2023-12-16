@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, unused_import
+import 'package:untitled/pages/HomePagePages/history_page.dart';
+
 import 'HomePagePages/user_profile.dart';
 import 'HomePagePages/trips_page_list.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
         ),
         body: Center(
-          child: [TripsPage(), Text("page 2?"), Profile()][currentPageIndex],
+          child: [TripsPage(), HistoryPage(), Profile()][currentPageIndex],
         ));
   }
 }

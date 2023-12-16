@@ -21,12 +21,13 @@ void main() async {
       Permission.locationWhenInUse.request();
     }
   });
-  var isstoredprofile = await Profile.fetchprofile();
+  var isstoredprofile = await SqfProfile.fetchprofile();
   var initialroute = '/SignIn';
   var cond = isstoredprofile == 'empty';
   if (cond) {
     print('empty');
   } else {
+    print('home');
     initialroute = '/HomePage';
   }
   runApp(MyApp(initialroute: initialroute));
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true),
       title: "Car Pool",
-      initialRoute: '/SignIn',
+      initialRoute: initialroute,
       routes: {
         '/SignUp': (context) => SignUp(),
         '/SignIn': (context) => SignIn(),

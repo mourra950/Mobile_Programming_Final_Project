@@ -51,6 +51,16 @@ class FBase {
     return 'Success';
   }
 
+  static Future<String> signOut() async {
+    try {
+      await _firebaseauth.signOut();
+      SqfProfile.deleteProfile();
+    } on FirebaseAuthException catch (error) {
+      return error.message ?? 'Authentication failed';
+    }
+    return 'Signed Out';
+  }
+
   static Future<String> signInRetrieveUserData(
       String userEmail, String pass) async {
     try {
@@ -63,7 +73,7 @@ class FBase {
       await docRef.get().then((values) {
         print('hamada');
         for (var value in values.docs) {
-          Profile.insertProfile(
+          SqfProfile.insertProfile(
               name: value.data()['username'],
               phone: value.data()['phone'],
               email: value.data()['email']);
