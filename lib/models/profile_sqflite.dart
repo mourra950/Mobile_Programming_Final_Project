@@ -10,6 +10,9 @@ class SqfProfile {
   static late String phone;
   static late String name;
   static late int id;
+  static late int money;
+  static late int virtualmoney;
+
   static late String email;
 
   static late Database database;
@@ -18,13 +21,13 @@ class SqfProfile {
   static initDB() async {
     if (true) {
       database = await openDatabase(
-        join(await getDatabasesPath(), 'profile.db'),
+        join(await getDatabasesPath(), 'profile2.db'),
         onCreate: (db, version) {
           return db.execute(
-            'CREATE TABLE profile(id INTEGER PRIMARY KEY, name TEXT, phone TEXT,email TEXT)',
+            'CREATE TABLE profile(id INTEGER PRIMARY KEY, name TEXT, phone TEXT,email TEXT,virtualmoney INTEGER,money INTEGER)',
           );
         },
-        version: 1,
+        version: 2,
       );
       init = true;
     }
@@ -38,6 +41,8 @@ class SqfProfile {
       'id': id,
       'name': name,
       'email': email,
+      'money': money,
+      'virtualmoney': virtualmoney,
     };
   }
 
@@ -49,18 +54,32 @@ class SqfProfile {
   }
 
   // Define a function that inserts dogs into the database
-  static Future<void> insertProfile({name, email, phone}) async {
+  static Future<void> insertProfile(
+      {name, email, phone, money, virtualmoney}) async {
     // Get a reference to the database.
     final db = await initDB();
     SqfProfile.phone = name;
     SqfProfile.email = email;
     SqfProfile.name = phone;
+    SqfProfile.money = money;
+    SqfProfile.virtualmoney = virtualmoney;
+
     print(name);
     print(phone);
     print(email);
+    print(money);
+    print(virtualmoney);
+
     await db.insert(
       'profile',
-      {'name': name, 'phone': phone, 'email': email, 'id': 1},
+      {
+        'name': name,
+        'phone': phone,
+        'email': email,
+        'money': money,
+        'virtualmoney': virtualmoney,
+        'id': 1
+      },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
@@ -73,6 +92,9 @@ class SqfProfile {
       name = maps[0]['name'];
       phone = maps[0]['phone'];
       email = maps[0]['email'];
+      money = maps[0]['money'];
+      virtualmoney = maps[0]['virtualmoney'];
+
       id = maps[0]['id'];
       return 'success';
     }
@@ -88,6 +110,8 @@ class SqfProfile {
       phone = maps[0]['phone'];
       email = maps[0]['email'];
       id = maps[0]['id'];
+      money = maps[0]['money'];
+      virtualmoney = maps[0]['virtualmoney'];
       print(email);
       return 'success';
     }

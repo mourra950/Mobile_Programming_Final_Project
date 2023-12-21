@@ -29,6 +29,8 @@ class FBase {
         'username': userName,
         'email': userEmail,
         'phone': phone,
+        'money': 500,
+        'virtualmoney': 500,
       });
 
       // Return success message
@@ -74,9 +76,12 @@ class FBase {
         print('hamada');
         for (var value in values.docs) {
           SqfProfile.insertProfile(
-              name: value.data()['username'],
-              phone: value.data()['phone'],
-              email: value.data()['email']);
+            name: value.data()['username'],
+            phone: value.data()['phone'],
+            email: value.data()['email'],
+            money: value.data()['money'],
+            virtualmoney: value.data()['virtualmoney'],
+          );
         }
       });
     } on FirebaseAuthException catch (error) {

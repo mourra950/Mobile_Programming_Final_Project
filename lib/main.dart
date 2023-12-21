@@ -24,6 +24,7 @@ void main() async {
   var isstoredprofile = await SqfProfile.fetchprofile();
   var initialroute = '/SignIn';
   var cond = isstoredprofile == 'empty';
+  // var cond = true;
   if (cond) {
     print('empty');
   } else {

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/components/trip_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:untitled/models/profile_sqflite.dart';
 
 class TripsPage extends StatefulWidget {
   const TripsPage({super.key});
@@ -34,7 +35,7 @@ class _TripsPageState extends State<TripsPage> {
           ),
         );
 
-    return query.snapshots();
+    return query.snapshots(includeMetadataChanges: true);
   }
 
   @override
@@ -51,17 +52,33 @@ class _TripsPageState extends State<TripsPage> {
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {
                 DocumentSnapshot doc = snapshot.data!.docs[index];
-                print(doc['date']);
-                var t = doc['date'];
-                print(t.runtimeType);
-
-                print(t);
+                var status = 3;
+                try {
+                  if (doc['pending'].contains(SqfProfile.email)) {
+                    status = 1;
+                  } else if ((doc['accepted'].contains(SqfProfile.email))) {
+                    status = 0;
+                  } else if (doc['rejected'].contains(SqfProfile.email)) {
+                    status = 2;
+                  } else if (doc['completed'].contains(SqfProfile.email)) {
+                    status = 4;
+                  }
+                } catch (err) {
+                  print('error');
+                }
+                var t = DateTime.fromMicrosecondsSinceEpoch(
+                    doc['date'].microsecondsSinceEpoch);
                 return TripCard(
-                  TripID: '1',
-                  date: '1',
-                  time: '1',
-                  to: '1',
-                  from: '1',
+                  TripID: doc.id,
+                  date: ' ${t.day}/${t.month}/${t.year}',
+                  time: doc['type'] == "AM" ? "5:30" : "7:30",
+                  gate: doc['gate'],
+                  location: doc['location'],
+                  driver: doc['driver'],
+                  map: '1',
+                  type: doc['type'],
+                  status: status,
+                  cost: doc['cost'],
                 );
               });
         } else {

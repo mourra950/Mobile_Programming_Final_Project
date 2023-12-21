@@ -24,6 +24,9 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   late String profileName;
   late String profileEmail;
+  late int profilemoney;
+  late int profilevirtualmoney;
+
   late String profilePhone;
   final Uri _url = Uri.parse('https://mourra950.github.io/Portofolio/');
   Future<void> _launchUrl() async {
@@ -47,6 +50,9 @@ class _ProfileState extends State<Profile> {
     profileName = SqfProfile.name;
     profileEmail = SqfProfile.email;
     profilePhone = SqfProfile.phone;
+    profilemoney = SqfProfile.money;
+    profilevirtualmoney = SqfProfile.virtualmoney;
+
     super.initState();
   }
 
@@ -72,6 +78,8 @@ class _ProfileState extends State<Profile> {
                   children: [
                     Text(profileName),
                     Text(profileEmail),
+                    Text('Money $profilemoney'),
+                    Text('Virtual Balance $profilevirtualmoney'),
                     Text(profilePhone),
                   ]),
             )),
@@ -83,7 +91,6 @@ class _ProfileState extends State<Profile> {
                     signOut();
                   },
                   child: Text('Sign out')),
-              ElevatedButton(onPressed: () {}, child: Text('Delete Account')),
               ElevatedButton(
                   onPressed: () async {
                     await _launchUrl();
